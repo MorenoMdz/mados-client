@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const LoginForm = styled.form`
   margin-top: 30px;
   display: flex;
   flex-direction: row;

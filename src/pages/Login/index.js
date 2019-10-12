@@ -1,22 +1,85 @@
-import React from 'react';
-import { FaArrowUp, FaPlus } from 'react-icons/fa';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { Form, SubmitButton } from './styles';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { LoginForm, SubmitButton } from './styles';
 import Container from '../../components/Container';
 
-export default function Login() {
-  return (
-    <Container>
-      <h1>Login</h1>
+import AuthActions from '../../store/ducks/auth';
 
-      <FaArrowUp color="#fff" size={14} />
-      <Form onSubmit={() => {}}>
-        <input type="text" placeholder="placeholder" />
-        <SubmitButton disabled>
-          <FaPlus color="#fff" size={14} />
-        </SubmitButton>
-      </Form>
-      <Link to="/">Main</Link>
-    </Container>
-  );
+class Login extends Component {
+  state = {
+    email: '',
+    password: '',
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { email, password } = this.state;
+    const { signInRequest } = this.props;
+    signInRequest(email, password);
+  };
+
+  handleInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  render() {
+    const { email, password } = this.state;
+    return (
+      <Container>
+        <h1>Login</h1>
+
+        <LoginForm onSubmit={this.handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            value={email}
+            onChange={this.handleInputChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={password}
+            onChange={this.handleInputChange}
+          />
+          <SubmitButton>
+            <FaPlus color="#fff" size={14} />
+          </SubmitButton>
+        </LoginForm>
+
+        <Link to="/">Home</Link>
+        <Link to="/app">App</Link>
+      </Container>
+    );
+  }
 }
+
+Login.propTypes = { signInRequest: PropTypes.func.isRequired };
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(AuthActions, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login);
+
+// loginUser = async e => {
+//   e.preventDefault();
+//   console.log('click');
+//   const response = await api.post('/sessions', {
+//     email: 't1@t.com',
+//     password: '123',
+//   });
+//   login(response.data.token);
+//   console.log(response);
+// };
+
+// logoutUser = async e => {
+//   localStorage.removeItem('@mados-Token');
+// };
