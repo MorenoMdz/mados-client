@@ -68,18 +68,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(Login);
-
-// loginUser = async e => {
-//   e.preventDefault();
-//   console.log('click');
-//   const response = await api.post('/sessions', {
-//     email: 't1@t.com',
-//     password: '123',
-//   });
-//   login(response.data.token);
-//   console.log(response);
-// };
-
-// logoutUser = async e => {
-//   localStorage.removeItem('@mados-Token');
-// };

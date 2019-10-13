@@ -4,28 +4,25 @@ import Immutable from 'seamless-immutable';
 /* Types & Action Creators */
 
 const { Types, Creators } = createActions({
-  signInRequest: ['email', 'password'],
-  signInSuccess: ['token'],
+  fetchServiceOrdersRequest: null,
+  fetchServiceOrdersSuccess: ['data'],
 });
 
-export const AuthTypes = Types;
+export const ServiceOrdersTypes = Types;
 export default Creators;
 
 /* Initial State */
 
-export const INITIAL_STATE = Immutable({
-  signedIn: false,
-  token: null,
-});
+export const INITIAL_STATE = Immutable({ data: [] });
 
 /* Reducers */
 
-export const success = (state, { token }) => {
-  return state.merge({ signedIn: true, token });
+export const fetchSuccess = (state, { data }) => {
+  return state.merge({ data });
 };
 
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SIGN_IN_SUCCESS]: success,
+  [Types.FETCH_SERVICE_ORDERS_SUCCESS]: fetchSuccess,
 });
