@@ -14,7 +14,7 @@ function SideBar(props) {
     <SideBarContainer>
       <AvatarContainer src={logo} alt="avatar" user={user} />
       <SideNav>
-        <SideLink to="/app" active>
+        <SideLink to="/app" active="true">
           <img src={dashboard} alt="" />
           <span>Dashboard</span>
         </SideLink>

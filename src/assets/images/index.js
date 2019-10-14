@@ -7,3 +7,7 @@ export { default as M } from './M.svg';
 export { default as statistics } from './statistics.svg';
 export { default as user } from './user.svg';
 export { default as dashboard } from './dashboard.svg';
+export { default as bell } from './bell.svg';
+export { default as HamburguerMenu } from './HamburguerMenu.svg';
+export { default as home } from './home.svg';
+export { default as mail } from './mail.svg';

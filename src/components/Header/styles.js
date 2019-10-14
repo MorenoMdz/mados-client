@@ -27,7 +27,6 @@ export const LeftHeader = styled.div`
 `;
 
 export const RightHeader = styled.div`
-  background-color: orange;
   height: 60px;
   width: 844px;
   position: relative;
@@ -36,23 +35,62 @@ export const RightHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
 `;
 
-export const Login = styled(Link)`
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  transition: opacity 0.3s;
+export const WelcomeBar = styled.div`
+  height: 60px;
+  width: 544px;
 
-  &:hover {
-    opacity: 0.7;
+  strong {
+    font-size: 12px;
+    margin: 0 5px 0 10px;
+    padding-bottom: 5px;
+  }
+
+  span {
+    font-size: 10px;
+    padding-bottom: 5px;
+  }
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding-left: 15px;
+  padding-bottom: 10px;
+`;
+
+export const Toolbar = styled.div`
+  height: 60px;
+  width: 244px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  /* padding-right: 10px; */
+  padding-bottom: 10px;
+
+  img {
+    /* margin-right: 15px; */
   }
 `;
 
-export const HomeLink = styled(Link)`
+export const Clock = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-right: 20px;
+  .clock {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+  .date {
+    font-size: 12px;
+  }
+`;
+
+export const CustomLink = styled(Link)`
   text-decoration: none;
   transition: opacity 0.3s;
 
@@ -61,6 +99,36 @@ export const HomeLink = styled(Link)`
   }
 
   img {
-    width: 36px;
+    width: ${props => (props.size ? `${props.size}px` : '24px')};
   }
+`;
+
+export const CustomButton = styled.button`
+  transition: opacity 0.3s;
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  img {
+    width: ${props => (props.size ? `${props.size}px` : '24px')};
+  }
+
+  margin-right: 15px;
+`;
+
+export const IndicatorBadge = styled.span`
+  background-color: #f40b7b;
+  position: relative;
+  padding: 1px 5px;
+  border-radius: 50%;
+  right: 10px;
+  top: -15px;
+
+  font-weight: bold;
+  color: #fff;
+
+  opacity: ${props => (props.empty ? 0 : 1)};
 `;
