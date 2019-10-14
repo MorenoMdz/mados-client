@@ -10,7 +10,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 1;
+  z-index: 30;
 `;
 
 export const LeftHeader = styled.div`
@@ -107,6 +107,7 @@ export const CustomButton = styled.button`
   transition: opacity 0.3s;
   background-color: transparent;
   border: none;
+  margin-right: 15px;
 
   &:hover {
     opacity: 0.7;
@@ -116,7 +117,19 @@ export const CustomButton = styled.button`
     width: ${props => (props.size ? `${props.size}px` : '24px')};
   }
 
-  margin-right: 15px;
+  .close {
+    animation: rotation 0.2s;
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+        opacity: 0;
+      }
+      100% {
+        transform: rotate(359deg);
+        opacity: 1;
+      }
+    }
+  }
 `;
 
 export const IndicatorBadge = styled.span`
@@ -131,4 +144,37 @@ export const IndicatorBadge = styled.span`
   color: #fff;
 
   opacity: ${props => (props.empty ? 0 : 1)};
+`;
+
+export const ToggleMenu = styled.div`
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  color: white;
+  padding: 20px;
+
+  h3 {
+    color: white;
+  }
+
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 300px;
+  height: 200px;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  animation: slideIn 0.2s forwards;
+  @keyframes slideIn {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
 `;

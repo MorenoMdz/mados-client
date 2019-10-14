@@ -35,4 +35,4 @@ AvatarContainer.defaultProps = {
 
 export default AvatarContainer;
 
-// TODO default props placeholder avatar
+// TODO avatar source size programmatically

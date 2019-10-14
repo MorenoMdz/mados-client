@@ -5,14 +5,17 @@ import { connect } from 'react-redux';
 import { SideBarContainer, SideNav, SideLink } from './styles';
 import { AvatarContainer } from '..';
 
-import logo from '../../assets/images/M.svg';
 import { dashboard, admin, statistics, cog } from '../../assets/images';
 
 function SideBar(props) {
   const { user } = props;
   return (
     <SideBarContainer>
-      <AvatarContainer src={logo} alt="avatar" user={user} />
+      <AvatarContainer
+        src={user.avatar_url && user.avatar_url}
+        alt="avatar"
+        user={user}
+      />
       <SideNav>
         <SideLink to="/app" active="true">
           <img src={dashboard} alt="" />
@@ -45,6 +48,7 @@ SideBar.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string,
     email: PropTypes.string,
+    avatar_url: PropTypes.string,
   }),
 };
 

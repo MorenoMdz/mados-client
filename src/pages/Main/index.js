@@ -23,6 +23,7 @@ const Main = props => {
   }, [fetchServiceOrdersRequest]);
 
   const { serviceOrders } = props;
+  console.log(serviceOrders);
   return (
     <Container>
       <SideBar />
@@ -50,7 +51,7 @@ const Main = props => {
 };
 
 Main.propTypes = {
-  serviceOrders: PropTypes.shape({}).isRequired,
+  serviceOrders: PropTypes.instanceOf(Array).isRequired,
   fetchServiceOrdersRequest: PropTypes.func.isRequired,
 };
 

@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Main from './pages/Main';
+import User from './pages/User';
 import Login from './pages/Login';
 
 import { isAuthenticated } from './services/auth';
@@ -29,6 +30,7 @@ export default function Routes() {
       <Route path="/login" component={Login} />
       <Route path="/" exact component={Home} />
       <PrivateRoute path="/app" component={Main} />
+      <PrivateRoute path="/user" component={User} />
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   );

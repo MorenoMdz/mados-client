@@ -5,6 +5,8 @@ import Immutable from 'seamless-immutable';
 const { Types, Creators } = createActions({
   fetchUserRequest: ['email'],
   fetchUserSuccess: ['user'],
+  updateUserRequest: ['updatedUser'],
+  updateUserSuccess: ['user'],
 });
 
 export const UserTypes = Types;
@@ -25,4 +27,5 @@ export const success = (state, { user }) => state.merge({ ...user });
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_USER_SUCCESS]: success,
+  [Types.UPDATE_USER_SUCCESS]: success,
 });

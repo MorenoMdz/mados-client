@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container } from '../../components';
+import { Container, MainContainer, BodyContainer } from '../../components';
 
 const Main = () => {
   return (
     <Container>
-      <h1>Home</h1>
-      <Link to="/login">Login</Link>
+      <BodyContainer>
+        <MainContainer>
+          <h1>Main</h1>
+
+          <Link to="/login">Login</Link>
+        </MainContainer>
+      </BodyContainer>
     </Container>
   );
 };
