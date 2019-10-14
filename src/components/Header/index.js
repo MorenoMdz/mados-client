@@ -6,8 +6,15 @@ import { bindActionCreators } from 'redux';
 
 import UserActions from '../../store/ducks/user';
 
-import logo from '../../assets/images/logo.svg';
-import { HeaderContainer, Login } from './styles';
+import logo from '../../assets/images/M.svg';
+
+import {
+  HeaderContainer,
+  LeftHeader,
+  RightHeader,
+  HomeLink,
+  Login,
+} from './styles';
 
 function Header({ user, fetchUserRequest }) {
   useEffect(() => {
@@ -15,16 +22,20 @@ function Header({ user, fetchUserRequest }) {
   }, [fetchUserRequest]);
   return (
     <HeaderContainer>
-      <Link to="/">
-        <img src={logo} alt="logo" />
-      </Link>
-      <span>Welcome, {user.username}</span>
+      <LeftHeader>
+        <HomeLink to="/">
+          <img src={logo} alt="logo" />
+        </HomeLink>
+      </LeftHeader>
+      <RightHeader>
+        <span>Welcome, {user.username}</span>
 
-      <Link to="/login">login</Link>
-      <Link to="/app">App</Link>
-      <Login to="/login">
-        <span>Login</span>
-      </Login>
+        <Link to="/login">login</Link>
+        <Link to="/app">App</Link>
+        <Login to="/login">
+          <span>Login</span>
+        </Login>
+      </RightHeader>
     </HeaderContainer>
   );
 }

@@ -1,0 +1,9 @@
+export { default as admin } from './admin.svg';
+export { default as bg1 } from './bg1.svg';
+export { default as bg2 } from './bg2.svg';
+export { default as cog } from './cog.svg';
+export { default as logo } from './logo.svg';
+export { default as M } from './M.svg';
+export { default as statistics } from './statistics.svg';
+export { default as user } from './user.svg';
+export { default as dashboard } from './dashboard.svg';
