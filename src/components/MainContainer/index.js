@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
-  width: 820px;
+  width: 940px;
   height: 660px;
   background-color: #fff;
   z-index: 20;
@@ -19,7 +19,7 @@ const MainContainer = styled.div`
   .box {
     background-color: #eee;
     color: #222;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     padding: 20px;
   }
 

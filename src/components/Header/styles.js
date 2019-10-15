@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div`
 
 export const LeftHeader = styled.div`
   background-color: #222;
-  width: 180px;
+  width: 150px;
   height: 60px;
   position: absolute;
   top: 0;
@@ -28,9 +28,9 @@ export const LeftHeader = styled.div`
 
 export const RightHeader = styled.div`
   height: 60px;
-  width: 844px;
+  width: 874px;
   position: relative;
-  left: 180px;
+  left: 150px;
 
   display: flex;
   justify-content: space-between;

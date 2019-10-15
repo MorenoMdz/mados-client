@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 const BodyContainer = styled.div`
-  width: 844px;
+  width: 974px;
   height: 740px;
   background-color: #f1f7fc;
-  z-index: 20;
+  z-index: 10;
   position: relative;
-  left: 180px;
+  left: 50px;
   top: 60px;
 
   display: flex;

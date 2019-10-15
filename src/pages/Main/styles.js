@@ -44,6 +44,7 @@ export const ListWrapper = styled.div`
     font-weight: normal;
     font-size: 0.9rem;
     color: white;
+    position: relative;
   }
 
   th:last-child {
