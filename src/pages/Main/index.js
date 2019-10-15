@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FaArrowUp } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { List } from './styles';
+import { ListWrapper, List, ListHeader } from './styles';
 import {
   Container,
   SideBar,
@@ -30,20 +28,49 @@ const Main = props => {
       <BodyContainer>
         <SearchInput />
         <MainContainer>
-          <FaArrowUp color="#fff" size={14} />
-          <h1>Main</h1>
-
-          <List>
-            {serviceOrders
-              ? serviceOrders.map(so => (
-                  <li key={so.id}>
-                    <p>{so.serial_number}</p>
-                    <p>{so.problem_description}</p>
-                  </li>
-                ))
-              : null}
-          </List>
-          <Link to="/login">Login</Link>
+          <ListWrapper className="box top-full">
+            {/* <ListHeader>
+              <span>O.S</span>
+              <span>Entrada</span>
+              <span>Cliente</span>
+              <span>Aparelho</span>
+              <span>Problema</span>
+            </ListHeader> */}
+            <table>
+              <thead>
+                <tr>
+                  <th>OS</th>
+                  <th>Entrada</th>
+                  <th>Cliente</th>
+                  <th>Aparelho</th>
+                  <th>Problema</th>
+                  {/* <th>Diagnóstico</th> */}
+                  {/* <th>Valor</th> */}
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {serviceOrders
+                  ? serviceOrders.map(so => (
+                      <tr key={so.id}>
+                        <td>{so.serial_number}</td>
+                        <td>{so.created_at}</td>
+                        <td>{so.client.name}</td>
+                        <td>{so.equipment.name}</td>
+                        <td>{so.problem_description}</td>
+                        {/* <td>Portugal</td> */}
+                        {/* <td>Instituto Superior Novas Profissões - INP</td> */}
+                        {/* TODO status filter logic */}
+                        <td>{so.osStatus.title}</td>
+                      </tr>
+                    ))
+                  : null}
+              </tbody>
+            </table>
+          </ListWrapper>
+          <div className="box bottom-full" />
+          {/* <div className="box bottom-left" />
+          <div className="box bottom-right" /> */}
         </MainContainer>
       </BodyContainer>
     </Container>

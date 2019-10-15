@@ -2,31 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { AvatarWrapper, AvatarImg } from './styles';
-import logo from '../../assets/images/user.svg';
+import defaultUser from '../../assets/images/user.svg';
 
 const AvatarContainer = props => {
-  const { src, user } = props;
+  const { src, size, user } = props;
   return (
     <AvatarWrapper>
-      <AvatarImg src={src} alt="avatar" />
+      <AvatarImg src={src || defaultUser} alt="avatar" size={size} />
       <strong>{user.username}</strong>
-      <div>
-        <span>Loja: </span>
-        <strong>todo</strong>
-      </div>
     </AvatarWrapper>
   );
 };
 
 AvatarContainer.propTypes = {
   src: PropTypes.string,
+  size: PropTypes.string,
   user: PropTypes.shape({
     username: PropTypes.string,
     email: PropTypes.string,
   }),
 };
+
 AvatarContainer.defaultProps = {
-  src: logo,
+  src: defaultUser,
+  size: '64',
   user: {
     name: 'guest',
     lastName: 'guest',
@@ -34,5 +33,3 @@ AvatarContainer.defaultProps = {
 };
 
 export default AvatarContainer;
-
-// TODO avatar source size programmatically

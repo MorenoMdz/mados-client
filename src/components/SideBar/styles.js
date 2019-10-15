@@ -20,6 +20,13 @@ export const SideNav = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
 `;
+export const AvatarWrapper = styled.div`
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const SideLink = styled(Link)`
   width: 180px;

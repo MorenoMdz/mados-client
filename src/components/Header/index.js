@@ -53,9 +53,6 @@ function Header({ user, fetchUserRequest }) {
           <CustomLink to="/app" size="30">
             <img src={home} alt="home" />
           </CustomLink>
-          <CustomLink to="/user" size="30">
-            <img src={admin} alt="home" />
-          </CustomLink>
           <strong>Bem vindo, {user.username}</strong>
           <span>Você tem X Ordens de Serviço aguardando ação</span>
         </WelcomeBar>

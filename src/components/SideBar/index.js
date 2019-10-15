@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import { SideBarContainer, SideNav, SideLink } from './styles';
+import { Link } from 'react-router-dom';
+import { SideBarContainer, AvatarWrapper, SideNav, SideLink } from './styles';
 import { AvatarContainer } from '..';
 
 import { dashboard, admin, statistics, cog } from '../../assets/images';
@@ -11,11 +11,16 @@ function SideBar(props) {
   const { user } = props;
   return (
     <SideBarContainer>
-      <AvatarContainer
-        src={user.avatar_url && user.avatar_url}
-        alt="avatar"
-        user={user}
-      />
+      <Link to="/user">
+        <AvatarWrapper>
+          <AvatarContainer
+            src={user.avatar_url && user.avatar_url}
+            alt="avatar"
+            user={user}
+            size="64"
+          />
+        </AvatarWrapper>
+      </Link>
       <SideNav>
         <SideLink to="/app" active="true">
           <img src={dashboard} alt="" />
