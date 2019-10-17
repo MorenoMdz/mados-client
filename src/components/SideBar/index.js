@@ -1,7 +1,11 @@
-import React, { useState, Fragment } from 'react';
+import React from 'react';
+import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+
+import SiteActions from '../../store/ducks/site';
+
 import {
   SideBarContainer,
   SideBarContainerCompact,
@@ -15,18 +19,25 @@ import { AvatarContainer } from '..';
 import { dashboard, admin, statistics, cog } from '../../assets/images';
 
 function SideBar(props) {
-  const [expanded, seExpanded] = useState(false);
-  const { user } = props;
+  const currentPage = props.location.pathname;
+  const {
+    user,
+    site: { sideBarExpanded },
+    siteUpdateRequest,
+  } = props;
 
-  const toggleSideBar = () => seExpanded(!expanded);
-  console.log(expanded);
+  // siteUpdateRequest({ sideBarExpanded: true });
+
+  const toggleSideBar = () =>
+    siteUpdateRequest({ sideBarExpanded: !sideBarExpanded });
+  // const toggleSideBar = () => seExpanded(!expanded);
   return (
     <>
-      {expanded ? (
+      {sideBarExpanded ? (
         <SideBarContainer>
           <ToggleBtn onClick={toggleSideBar}>{'<<<'}</ToggleBtn>
           <Link to="/user">
-            <AvatarWrapper>
+            <AvatarWrapper expand="true">
               <AvatarContainer
                 src={user.avatar_url && user.avatar_url}
                 alt="avatar"
@@ -36,19 +47,31 @@ function SideBar(props) {
             </AvatarWrapper>
           </Link>
           <SideNav>
-            <SideLink to="/app" active="true">
+            <SideLink
+              to="/app"
+              className={currentPage === '/app' ? 'active' : null}
+            >
               <img src={dashboard} alt="" />
               <span>Dashboard</span>
             </SideLink>
-            <SideLink to="/reports">
+            <SideLink
+              to="/reports"
+              className={currentPage === '/reports' ? 'active' : null}
+            >
               <img src={statistics} alt="" />
               <span>Relatórios</span>
             </SideLink>
-            <SideLink to="/admin">
+            <SideLink
+              to="/admin"
+              className={currentPage === '/admin' ? 'active' : null}
+            >
               <img src={admin} alt="" />
               <span>Admin</span>
             </SideLink>
-            <SideLink to="/config">
+            <SideLink
+              to="/config"
+              className={currentPage === '/config' ? 'active' : null}
+            >
               <img src={cog} alt="" />
               <span>Configurações</span>
             </SideLink>
@@ -57,6 +80,41 @@ function SideBar(props) {
       ) : (
         <SideBarContainerCompact>
           <ToggleBtn onClick={toggleSideBar}>{'>>>'}</ToggleBtn>
+          <Link to="/user">
+            <AvatarWrapper>
+              <AvatarContainer
+                src={user.avatar_url && user.avatar_url}
+                alt="avatar"
+                size="34"
+              />
+            </AvatarWrapper>
+          </Link>
+          <SideNav>
+            <SideLink
+              to="/app"
+              className={currentPage === '/app' ? 'active' : null}
+            >
+              <img src={dashboard} alt="" />
+            </SideLink>
+            <SideLink
+              to="/reports"
+              className={currentPage === '/reports' ? 'active' : null}
+            >
+              <img src={statistics} alt="" />
+            </SideLink>
+            <SideLink
+              to="/admin"
+              className={currentPage === '/admin' ? 'active' : null}
+            >
+              <img src={admin} alt="" />
+            </SideLink>
+            <SideLink
+              to="/config"
+              className={currentPage === '/config' ? 'active' : null}
+            >
+              <img src={cog} alt="" />
+            </SideLink>
+          </SideNav>
         </SideBarContainerCompact>
       )}
     </>
@@ -66,6 +124,7 @@ function SideBar(props) {
 const mapStateToProps = state => {
   return {
     user: state.user,
+    site: state.site,
   };
 };
 
@@ -75,6 +134,11 @@ SideBar.propTypes = {
     email: PropTypes.string,
     avatar_url: PropTypes.string,
   }),
+  site: PropTypes.shape({
+    sideBarExpanded: PropTypes.bool.isRequired,
+  }).isRequired,
+  location: PropTypes.instanceOf(Object).isRequired,
+  siteUpdateRequest: PropTypes.func.isRequired,
 };
 
 SideBar.defaultProps = {
@@ -84,4 +148,10 @@ SideBar.defaultProps = {
   },
 };
 
-export default connect(mapStateToProps)(SideBar);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(SiteActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(SideBar));

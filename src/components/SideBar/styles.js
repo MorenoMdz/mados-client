@@ -12,6 +12,9 @@ export const SideBarContainer = styled.div`
   padding-top: 60px;
   color: #fff;
   z-index: 20;
+  a {
+    width: 150px;
+  }
 `;
 
 export const SideBarContainerCompact = styled.div`
@@ -25,18 +28,22 @@ export const SideBarContainerCompact = styled.div`
   padding-top: 60px;
   color: #fff;
   z-index: 20;
+  a {
+    width: 50px;
+    padding-left: 5px;
+  }
 `;
 
 export const SideNav = styled.div`
-  width: 160px;
+  max-width: 150px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 `;
 export const AvatarWrapper = styled.div`
-  width: 150px;
-  height: 150px;
+  width: ${props => (props.expand ? '150px' : '40px;')};
+  height: ${props => (props.expand ? '150px' : '50px;')};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,10 +51,9 @@ export const AvatarWrapper = styled.div`
 `;
 
 export const SideLink = styled(Link)`
-  width: 150px;
+  max-width: 150px;
   height: 30px;
   margin: 5px 0;
-  background-color: ${props => (props.active ? '#0E2438' : 'transparent')};
   color: #fff;
   text-decoration: none;
   display: flex;
@@ -57,6 +63,11 @@ export const SideLink = styled(Link)`
   }
   span {
     padding: 0 10px;
+  }
+  &.active {
+    background-color: #0e2438;
+    font-weight: bold;
+    text-decoration: underline;
   }
 `;
 

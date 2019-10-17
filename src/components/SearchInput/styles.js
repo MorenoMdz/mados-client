@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
-  width: 500px;
+  width: ${props => props.width};
+  position: relative;
+  left: ${props => (props.expand ? '120px' : '20px')};
   height: 30px;
   background-color: #efefef;
   padding: 0 10px;
@@ -10,5 +12,6 @@ export const Input = styled.input`
 `;
 
 export const Form = styled.form`
-  margin: 20px;
+  margin: 20px 0 20px 10px;
+  width: 100%;
 `;

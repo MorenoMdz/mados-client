@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ListWrapper, List, ListHeader } from './styles';
+import { ListWrapper } from './styles';
 import {
   Container,
   SideBar,
@@ -14,28 +14,24 @@ import {
 import ServiceOrdersActions from '../../store/ducks/serviceOrders';
 
 const Main = props => {
-  const { fetchServiceOrdersRequest } = props;
+  const {
+    serviceOrders,
+    site: { sideBarExpanded },
+    fetchServiceOrdersRequest,
+  } = props;
 
   useEffect(() => {
     fetchServiceOrdersRequest();
   }, [fetchServiceOrdersRequest]);
 
-  const { serviceOrders } = props;
-  console.log(serviceOrders);
+  console.log('sideBarExpanded', props.site);
   return (
     <Container>
       <SideBar />
       <BodyContainer>
-        <SearchInput />
-        <MainContainer>
+        <SearchInput expand={sideBarExpanded} width="500px" />
+        <MainContainer expand={sideBarExpanded}>
           <ListWrapper className="box top-full">
-            {/* <ListHeader>
-              <span>O.S</span>
-              <span>Entrada</span>
-              <span>Cliente</span>
-              <span>Aparelho</span>
-              <span>Problema</span>
-            </ListHeader> */}
             <table>
               <thead>
                 <tr>
@@ -85,6 +81,7 @@ Main.propTypes = {
 const mapStateToProps = state => {
   return {
     serviceOrders: state.serviceOrders.data,
+    site: state.site,
   };
 };
 

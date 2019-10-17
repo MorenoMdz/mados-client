@@ -61,3 +61,9 @@ export const ListWrapper = styled.div`
     background: #f8f6ff;
   }
 `;
+
+export const ListHeader = styled.div`
+  width: 100%;
+`;
+
+export const List = styled.ul``;

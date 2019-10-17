@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
-  width: 940px;
+  width: ${props => (props.expand ? '840px' : '940px')};
   height: 660px;
   background-color: #fff;
   z-index: 20;
   position: relative;
-  margin: 0 auto;
+  left: ${props => (props.expand ? '120px' : '20px')};
+  /* margin: 0 auto; */
 
   padding: 10px;
 
@@ -19,7 +20,6 @@ const MainContainer = styled.div`
   .box {
     background-color: #eee;
     color: #222;
-    /* border-radius: 5px; */
     padding: 20px;
   }
 
