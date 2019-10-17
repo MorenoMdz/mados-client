@@ -61,3 +61,29 @@ export const ListWrapper = styled.div`
     background: #f8f6ff;
   }
 `;
+
+export const TopDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 28px;
+`;
+
+export const FiltersButton = styled.button`
+  width: 100px;
+  height: 30px;
+  color: white;
+  font-weight: bold;
+  background: ${props => props.color || '#0a3e69'};
+`;
+
+export const RightMenu = styled.div`
+  position: absolute;
+  top: 0;
+  left: calc(100% - 50px);
+  height: 500px;
+  width: 50px;
+  background: linear-gradient(180deg, #0a3e69 0%, #000000 100%);
+  z-index: 30;
+`;

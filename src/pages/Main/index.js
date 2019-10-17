@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ListWrapper } from './styles';
+import { TopDiv, ListWrapper, FiltersButton } from './styles';
 import {
   Container,
   SideBar,
@@ -24,13 +24,26 @@ const Main = props => {
     fetchServiceOrdersRequest();
   }, [fetchServiceOrdersRequest]);
 
-  console.log('sideBarExpanded', props.site);
+  const applyFilter = () => {
+    // filter over all SO to match @filter
+    // return filteredServiceOrders
+  };
+  // have an indicator that a filter is active, click ones to activate (pressed button) click again to deactivate
+
   return (
     <Container>
       <SideBar />
       <BodyContainer>
-        <SearchInput expand={sideBarExpanded} width="500px" />
+        <TopDiv>
+          <SearchInput expand={sideBarExpanded} width="500px" />
+          <FiltersButton color="#26C89F">filter</FiltersButton>
+          <FiltersButton color="#45A1EB">filter</FiltersButton>
+          <FiltersButton color="#F97D37">filter</FiltersButton>
+          <FiltersButton color="#607D8B">filter</FiltersButton>
+          <FiltersButton color="#FF5370">filter</FiltersButton>
+        </TopDiv>
         <MainContainer expand={sideBarExpanded}>
+          {/* <RightMenu /> */}
           <ListWrapper className="box top-full">
             <table>
               <thead>
@@ -75,6 +88,9 @@ const Main = props => {
 
 Main.propTypes = {
   serviceOrders: PropTypes.instanceOf(Array).isRequired,
+  site: PropTypes.shape({
+    sideBarExpanded: PropTypes.bool.isRequired,
+  }).isRequired,
   fetchServiceOrdersRequest: PropTypes.func.isRequired,
 };
 
