@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { format } from 'date-fns';
-
 import UserActions from '../../store/ducks/user';
 
+import Clock from '../Clock';
 import {
   M,
   home,
@@ -14,7 +13,6 @@ import {
   closeButton,
   bell,
   mail,
-  admin,
 } from '../../assets/images';
 
 import {
@@ -24,13 +22,13 @@ import {
   CustomLink,
   WelcomeBar,
   Toolbar,
-  Clock,
+  // Clock,
   IndicatorBadge,
   CustomButton,
   ToggleMenu,
 } from './styles';
 
-function Header({ user, fetchUserRequest }) {
+function Header({ user, site: { sideBarExpanded }, fetchUserRequest }) {
   const [showMenu, setShowMenu] = useState('');
   useEffect(() => {
     fetchUserRequest();
@@ -38,17 +36,14 @@ function Header({ user, fetchUserRequest }) {
 
   const toggleMenu = type => setShowMenu(type);
 
-  const clock = format(Date.now(), 'hh:mm');
-  const day = format(Date.now(), 'dd/MM/yyyy');
-
   return (
     <HeaderContainer>
-      <LeftHeader>
-        <CustomLink to="/" size="36">
+      <LeftHeader expand={sideBarExpanded}>
+        <CustomLink to="/" size="30">
           <img src={M} alt="logo" />
         </CustomLink>
       </LeftHeader>
-      <RightHeader>
+      <RightHeader expand={sideBarExpanded}>
         <WelcomeBar>
           <CustomLink to="/app" size="30">
             <img src={home} alt="home" />
@@ -56,11 +51,8 @@ function Header({ user, fetchUserRequest }) {
           <strong>Bem vindo, {user.username}</strong>
           <span>Você tem X Ordens de Serviço aguardando ação</span>
         </WelcomeBar>
+        <Clock />
         <Toolbar>
-          <Clock>
-            <span className="clock">{clock}</span>
-            <span className="date">{day}</span>
-          </Clock>
           <CustomButton
             size="22"
             onClick={() => toggleMenu(!showMenu ? 'notifications' : '')}
@@ -103,6 +95,7 @@ function Header({ user, fetchUserRequest }) {
 const mapStateToProps = state => {
   return {
     user: state.user,
+    site: state.site,
   };
 };
 
@@ -111,6 +104,9 @@ Header.propTypes = {
     username: PropTypes.string,
     email: PropTypes.string,
   }),
+  site: PropTypes.shape({
+    sideBarExpanded: PropTypes.bool.isRequired,
+  }).isRequired,
   fetchUserRequest: PropTypes.func.isRequired,
 };
 

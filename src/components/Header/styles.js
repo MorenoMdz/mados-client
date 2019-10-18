@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div`
 
 export const LeftHeader = styled.div`
   background-color: #222;
-  width: 150px;
+  width: ${props => (props.expand ? '150px' : '50px')};
   height: 60px;
   position: absolute;
   top: 0;
@@ -28,9 +28,9 @@ export const LeftHeader = styled.div`
 
 export const RightHeader = styled.div`
   height: 60px;
-  width: 874px;
+  width: ${props => (props.expand ? '874px' : '974px')};
   position: relative;
-  left: 150px;
+  left: ${props => (props.expand ? '150px' : '50px')};
 
   display: flex;
   justify-content: space-between;
@@ -56,12 +56,13 @@ export const WelcomeBar = styled.div`
   justify-content: flex-start;
   align-items: flex-end;
   padding-left: 15px;
+  /* left: ${props => (props.expand ? '120px' : '20px')}; */
   padding-bottom: 10px;
 `;
 
 export const Toolbar = styled.div`
   height: 60px;
-  width: 244px;
+  width: 164px;
 
   display: flex;
   justify-content: flex-end;
@@ -71,22 +72,6 @@ export const Toolbar = styled.div`
 
   img {
     /* margin-right: 15px; */
-  }
-`;
-
-export const Clock = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  margin-right: 20px;
-  .clock {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 2px;
-  }
-  .date {
-    font-size: 12px;
   }
 `;
 

@@ -6,6 +6,8 @@ import Immutable from 'seamless-immutable';
 const { Types, Creators } = createActions({
   fetchServiceOrdersRequest: null,
   fetchServiceOrdersSuccess: ['data'],
+  searchServiceOrdersRequest: ['filter'],
+  searchServiceOrdersSuccess: ['data'],
 });
 
 export const ServiceOrdersTypes = Types;
@@ -20,9 +22,13 @@ export const INITIAL_STATE = Immutable({ data: [] });
 export const fetchSuccess = (state, { data }) => {
   return state.merge({ data });
 };
+export const searchSuccess = (state, { data }) => {
+  return state.merge({ data });
+};
 
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_SERVICE_ORDERS_SUCCESS]: fetchSuccess,
+  [Types.SEARCH_SERVICE_ORDERS_SUCCESS]: searchSuccess,
 });

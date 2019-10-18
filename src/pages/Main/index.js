@@ -18,14 +18,16 @@ const Main = props => {
     serviceOrders,
     site: { sideBarExpanded },
     fetchServiceOrdersRequest,
+    searchServiceOrdersRequest,
   } = props;
 
   useEffect(() => {
     fetchServiceOrdersRequest();
   }, [fetchServiceOrdersRequest]);
 
-  const applyFilter = () => {
+  const applyFilter = filter => {
     // filter over all SO to match @filter
+    searchServiceOrdersRequest(filter);
     // return filteredServiceOrders
   };
   // have an indicator that a filter is active, click ones to activate (pressed button) click again to deactivate
@@ -36,9 +38,15 @@ const Main = props => {
       <BodyContainer>
         <TopDiv>
           <SearchInput expand={sideBarExpanded} width="500px" />
-          <FiltersButton color="#26C89F">filter</FiltersButton>
-          <FiltersButton color="#45A1EB">filter</FiltersButton>
-          <FiltersButton color="#F97D37">filter</FiltersButton>
+          <FiltersButton color="#26C89F" onClick={() => applyFilter(1)}>
+            filter
+          </FiltersButton>
+          <FiltersButton color="#45A1EB" onClick={() => applyFilter(2)}>
+            filter
+          </FiltersButton>
+          <FiltersButton color="#F97D37" onClick={() => applyFilter(3)}>
+            filter
+          </FiltersButton>
           <FiltersButton color="#607D8B">filter</FiltersButton>
           <FiltersButton color="#FF5370">filter</FiltersButton>
         </TopDiv>
@@ -92,6 +100,7 @@ Main.propTypes = {
     sideBarExpanded: PropTypes.bool.isRequired,
   }).isRequired,
   fetchServiceOrdersRequest: PropTypes.func.isRequired,
+  searchServiceOrdersRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
