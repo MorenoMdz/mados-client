@@ -10,11 +10,13 @@ import {
   MainContainer,
   SearchInput,
   BodyContainer,
+  OrderView,
 } from '../../components';
 
 import ServiceOrdersActions from '../../store/ducks/serviceOrders';
 
 const Main = props => {
+  const [orderView, setOrderView] = useState({ active: false, orderId: null });
   const [osStatus, setOsStatuses] = useState([]);
   const [activeFilter, setActiveFilter] = useState({ clicked: false });
   const {
@@ -73,6 +75,12 @@ const Main = props => {
       <BodyContainer>
         <TopDiv>
           <SearchInput expand={sideBarExpanded} width="500px" />
+          <button
+            type="button"
+            onClick={() => setOrderView({ active: !orderView.active })}
+          >
+            go
+          </button>
           {osStatus.map((status, i) => (
             <FiltersButton
               key={status.title}
@@ -85,39 +93,51 @@ const Main = props => {
           ))}
         </TopDiv>
         <MainContainer expand={sideBarExpanded}>
-          <ListWrapper className="box top-full">
-            <table>
-              <thead>
-                <tr>
-                  <th>OS</th>
-                  <th>Entrada</th>
-                  <th>Cliente</th>
-                  <th>Aparelho</th>
-                  <th>Problema</th>
-                  {/* <th>Diagnóstico</th> */}
-                  {/* <th>Valor</th> */}
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {serviceOrders
-                  ? serviceOrders.map(so => (
-                      <tr key={so.id}>
-                        <td>{so.serial_number}</td>
-                        <td>{so.created_at}</td>
-                        {/* <td>{so.client.name}</td> */}
-                        <td>{so.repairStatus.title}</td>
-                        <td>{so.diagStatus.title}</td>
-                        <td>{so.problem_description}</td>
-                        {/* <td>Portugal</td> */}
-                        {/* <td>Instituto Superior Novas Profissões - INP</td> */}
-                        <td>{so.osStatus.title}</td>
-                      </tr>
-                    ))
-                  : null}
-              </tbody>
-            </table>
-          </ListWrapper>
+          {!orderView.active ? (
+            <ListWrapper className="box top-full">
+              <table>
+                <thead>
+                  <tr>
+                    <th>OS</th>
+                    <th>Entrada</th>
+                    <th>Cliente</th>
+                    <th>Aparelho</th>
+                    <th>Problema</th>
+                    {/* <th>Diagnóstico</th> */}
+                    {/* <th>Valor</th> */}
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {serviceOrders
+                    ? serviceOrders.map(so => (
+                        <tr
+                          key={so.id}
+                          onClick={() =>
+                            setOrderView({
+                              active: !orderView.active,
+                              orderId: so.id,
+                            })
+                          }
+                        >
+                          <td>{so.serial_number}</td>
+                          <td>{so.created_at}</td>
+                          {/* <td>{so.client.name}</td> */}
+                          <td>{so.repairStatus.title}</td>
+                          <td>{so.diagStatus.title}</td>
+                          <td>{so.problem_description}</td>
+                          {/* <td>Portugal</td> */}
+                          {/* <td>Instituto Superior Novas Profissões - INP</td> */}
+                          <td>{so.osStatus.title}</td>
+                        </tr>
+                      ))
+                    : null}
+                </tbody>
+              </table>
+            </ListWrapper>
+          ) : (
+            <OrderView orderId={orderView.orderId} />
+          )}
           <div className="box bottom-full" />
           {/* <div className="box bottom-left" />
           <div className="box bottom-right" /> */}
