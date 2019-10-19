@@ -26,5 +26,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/destructuring-assignment': 'off',
+    'array-callback-return': 'off',
   },
 };

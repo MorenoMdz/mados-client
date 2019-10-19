@@ -74,8 +74,10 @@ export const FiltersButton = styled.button`
   width: 100px;
   height: 30px;
   color: white;
+  font-size: 10px;
   font-weight: bold;
   background: ${props => props.color || '#0a3e69'};
+  opacity: ${props => props.active && '0.5'};
 `;
 
 export const RightMenu = styled.div`

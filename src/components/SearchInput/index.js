@@ -1,11 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Input, Form } from './styles';
 
-const SearchInput = ({ expand, width }) => {
+import ServiceOrdersActions from '../../store/ducks/serviceOrders';
+
+const SearchInput = ({ expand, width, searchServiceOrdersRequest }) => {
+  const search = e => {
+    searchServiceOrdersRequest(e.target.value, 'search');
+  };
+
   return (
     <Form>
-      <Input placeholder="buscar" expand={expand} width={width} />
+      <Input
+        placeholder="buscar"
+        expand={expand}
+        width={width}
+        onChange={e => search(e)}
+      />
     </Form>
   );
 };
@@ -13,6 +26,7 @@ const SearchInput = ({ expand, width }) => {
 SearchInput.propTypes = {
   expand: PropTypes.bool,
   width: PropTypes.string,
+  searchServiceOrdersRequest: PropTypes.func.isRequired,
 };
 
 SearchInput.defaultProps = {
@@ -20,4 +34,9 @@ SearchInput.defaultProps = {
   width: '500px',
 };
 
-export default SearchInput;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(ServiceOrdersActions, dispatch);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SearchInput);

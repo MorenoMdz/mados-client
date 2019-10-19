@@ -12,3 +12,4 @@ export { default as HamburguerMenu } from './HamburguerMenu.svg';
 export { default as home } from './home.svg';
 export { default as mail } from './mail.svg';
 export { default as closeButton } from './close-button.svg';
+export { default as menu } from './menu.svg';

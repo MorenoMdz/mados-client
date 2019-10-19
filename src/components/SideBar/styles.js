@@ -81,4 +81,8 @@ export const ToggleBtn = styled.div`
   &:hover {
     font-weight: bold;
   }
+  img {
+    width: 20px;
+    margin-right: -10px;
+  }
 `;

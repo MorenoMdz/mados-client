@@ -12,16 +12,15 @@ export function* fetchServiceOrders() {
     console.log('fetch Orders failed');
   }
 }
-export function* searchServiceOrders({ filter }) {
+export function* searchServiceOrders(data) {
+  const { text, filterType, statusType } = data;
   try {
-    // const response = yield call(api.get, '/serviceorders');
-    const response = yield call(
-      api.get,
-      `search?type=status&status=diagstatus&value=${filter}`
-    );
+    let url;
+    if (filterType === 'filter')
+      url = `search?type=status&status=${statusType}status&value=`;
+    if (filterType === 'search') url = 'search?type=raw&value=';
+    const response = yield call(api.get, `${url}${text}`);
     const resArr = Array.from(response.data);
-    console.log('search saga', filter);
-    console.log('results saga', resArr);
     yield put(ServiceOrdersActions.searchServiceOrdersSuccess(resArr));
   } catch (error) {
     console.log('search Orders failed');

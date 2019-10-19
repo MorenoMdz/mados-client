@@ -16,7 +16,7 @@ import {
 } from './styles';
 import { AvatarContainer } from '..';
 
-import { dashboard, admin, statistics, cog } from '../../assets/images';
+import { dashboard, admin, statistics, cog, menu } from '../../assets/images';
 
 function SideBar(props) {
   const currentPage = props.location.pathname;
@@ -79,7 +79,9 @@ function SideBar(props) {
         </SideBarContainer>
       ) : (
         <SideBarContainerCompact>
-          <ToggleBtn onClick={toggleSideBar}>{'>>>'}</ToggleBtn>
+          <ToggleBtn onClick={toggleSideBar}>
+            <img src={menu} alt="expandMenu" />
+          </ToggleBtn>
           <Link to="/user">
             <AvatarWrapper>
               <AvatarContainer
