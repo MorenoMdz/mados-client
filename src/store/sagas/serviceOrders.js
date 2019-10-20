@@ -3,6 +3,15 @@ import api from '../../services/api';
 
 import ServiceOrdersActions from '../ducks/serviceOrders';
 
+export function* fetchServiceOrder({ id }) {
+  try {
+    const response = yield call(api.get, `/serviceorders/${id}`);
+    yield put(ServiceOrdersActions.fetchServiceOrderSuccess(response.data));
+  } catch (error) {
+    console.log('fetch Order failed');
+  }
+}
+
 export function* fetchServiceOrders() {
   try {
     const response = yield call(api.get, '/serviceorders');

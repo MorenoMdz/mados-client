@@ -20,6 +20,13 @@ export const ListWrapper = styled.div`
       /* minmax(150px, 1fr) */
       /* minmax(80px, 1fr) */
       minmax(20px, 0.7fr);
+    tr:hover td {
+      background-color: #ccc;
+    }
+  }
+
+  tr {
+    cursor: pointer;
   }
 
   thead,

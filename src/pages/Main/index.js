@@ -30,6 +30,7 @@ const Main = props => {
     fetchServiceOrdersRequest();
   }, [fetchServiceOrdersRequest]);
 
+  // TODO have all initial fetching in a single effect that toggles a loading
   useEffect(() => {
     const fetchStatuses = async () => {
       const diagStatuses = await api.get('/diagstatus');
@@ -51,6 +52,7 @@ const Main = props => {
   }, []);
 
   const applyFilter = (text, statusType, status) => {
+    setOrderView({ active: true });
     const { clicked } = activeFilter;
     if (clicked && status === activeFilter.status) {
       searchServiceOrdersRequest('', 'search');
@@ -93,7 +95,7 @@ const Main = props => {
           ))}
         </TopDiv>
         <MainContainer expand={sideBarExpanded}>
-          {!orderView.active ? (
+          {orderView.active ? (
             <ListWrapper className="box top-full">
               <table>
                 <thead>
@@ -136,9 +138,12 @@ const Main = props => {
               </table>
             </ListWrapper>
           ) : (
-            <OrderView orderId={orderView.orderId} />
+            <OrderView
+              orderId={/* orderView.orderId */ 30}
+              expand={sideBarExpanded}
+            />
           )}
-          <div className="box bottom-full" />
+          {/* <div className="box bottom-full" /> */}
           {/* <div className="box bottom-left" />
           <div className="box bottom-right" /> */}
         </MainContainer>

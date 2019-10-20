@@ -3,7 +3,11 @@ import { all, takeLatest } from 'redux-saga/effects';
 import { signIn } from './auth';
 import { siteUpdate } from './site';
 import { fetchUser, updateUser } from './user';
-import { fetchServiceOrders, searchServiceOrders } from './serviceOrders';
+import {
+  fetchServiceOrder,
+  fetchServiceOrders,
+  searchServiceOrders,
+} from './serviceOrders';
 
 import { AuthTypes } from '../ducks/auth';
 import { SiteTypes } from '../ducks/site';
@@ -16,6 +20,10 @@ export default function* rootSaga() {
     takeLatest(SiteTypes.SITE_UPDATE_REQUEST, siteUpdate),
     takeLatest(UserTypes.FETCH_USER_REQUEST, fetchUser),
     takeLatest(UserTypes.UPDATE_USER_REQUEST, updateUser),
+    takeLatest(
+      ServiceOrdersTypes.FETCH_SERVICE_ORDER_REQUEST,
+      fetchServiceOrder
+    ),
     takeLatest(
       ServiceOrdersTypes.FETCH_SERVICE_ORDERS_REQUEST,
       fetchServiceOrders
