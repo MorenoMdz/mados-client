@@ -2,21 +2,28 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
-  height: 500px;
-  width: 840px;
+  height: 650px;
   padding: 0 !important;
   overflow: auto;
   width: ${props => (props.expand ? '820px' : '920px')};
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+export const OrderContainer = styled.div`
+  height: 500px;
 `;
 
 export const OrderHeader = styled.div`
-  height: 30px;
+  height: 20px;
   background: #253544;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   color: #fff;
+  font-size: 0.8rem;
 `;
 
 export const OrderBody = styled.div`
@@ -25,7 +32,7 @@ export const OrderBody = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const CardBody = styled.div`
@@ -39,7 +46,6 @@ export const CardBody = styled.div`
   padding-left: 25px;
   color: #fff;
   line-height: 1.6rem;
-  background: grey;
   div {
     width: 100%;
     display: flex;
@@ -49,7 +55,7 @@ export const CardBody = styled.div`
   }
   h5 {
     color: #000;
-    width: 430px;
+    width: 330px;
     border-bottom: 1px solid black;
     margin-bottom: 5px;
     position: relative;
@@ -72,11 +78,6 @@ export const TextDiv = styled.div`
   justify-content: flex-start;
   align-items: center;
   color: #000;
-
-  /* strong {
-    white-space: nowrap;
-    max-width: 30ch;
-  } */
 `;
 
 export const TextAreaDiv = styled.div`
@@ -103,4 +104,58 @@ export const DiagAreaDiv = styled.div`
   margin: 5px auto;
   border: 1px solid black;
   padding: 5px 10px;
+`;
+
+export const BottomCard = styled.div`
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 160px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  width: ${props => (props.expand ? '820px' : '920px')};
+`;
+
+export const FooterCard = styled.div`
+  width: 49%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  div {
+    width: 49%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 5px;
+    /* margin: 0 auto; */
+  }
+`;
+
+export const FooterHeader = styled.span`
+  position: relative;
+  left: -5px;
+  height: 20px;
+  width: 100%;
+  background: #253544;
+  padding: 3px 10px;
+  color: #fff;
+  font-size: 0.8rem;
+`;
+
+export const ActionButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 3px;
+  background-color: ${props => props.color || 'teal'};
+  width: ${props => props.width || '100%'};
+  height: 25px;
+  font-size: 0.8rem;
 `;

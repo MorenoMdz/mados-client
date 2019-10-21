@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import api from '../../services/api';
-import { TopDiv, ListWrapper, FiltersButton } from './styles';
+import { TopDiv, ListWrapper, FiltersButton, BottomCard } from './styles';
 import {
   Container,
   SideBar,
@@ -76,7 +76,11 @@ const Main = props => {
       <SideBar />
       <BodyContainer>
         <TopDiv>
-          <SearchInput expand={sideBarExpanded} width="500px" />
+          <SearchInput
+            expand={sideBarExpanded}
+            width="500px"
+            setOrderView={setOrderView}
+          />
           <button
             type="button"
             onClick={() => setOrderView({ active: !orderView.active })}
@@ -94,8 +98,8 @@ const Main = props => {
             </FiltersButton>
           ))}
         </TopDiv>
-        <MainContainer expand={sideBarExpanded}>
-          {orderView.active ? (
+        {orderView.active ? (
+          <MainContainer expand={sideBarExpanded}>
             <ListWrapper className="box top-full">
               <table>
                 <thead>
@@ -137,16 +141,21 @@ const Main = props => {
                 </tbody>
               </table>
             </ListWrapper>
-          ) : (
+            <BottomCard className="box bottom-full" expand={sideBarExpanded}>
+              <h3>list</h3>
+            </BottomCard>
+          </MainContainer>
+        ) : (
+          <MainContainer expand={sideBarExpanded}>
             <OrderView
               orderId={/* orderView.orderId */ 30}
               expand={sideBarExpanded}
             />
-          )}
-          {/* <div className="box bottom-full" /> */}
-          {/* <div className="box bottom-left" />
+          </MainContainer>
+        )}
+
+        {/* <div className="box bottom-left" />
           <div className="box bottom-right" /> */}
-        </MainContainer>
       </BodyContainer>
     </Container>
   );

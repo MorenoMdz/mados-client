@@ -6,9 +6,15 @@ import { Input, Form } from './styles';
 
 import ServiceOrdersActions from '../../store/ducks/serviceOrders';
 
-const SearchInput = ({ expand, width, searchServiceOrdersRequest }) => {
+const SearchInput = ({
+  expand,
+  width,
+  searchServiceOrdersRequest,
+  setOrderView,
+}) => {
   const search = e => {
     searchServiceOrdersRequest(e.target.value, 'search');
+    setOrderView({ active: true });
   };
 
   return (
