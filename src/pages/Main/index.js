@@ -100,6 +100,7 @@ const Main = props => {
           <TopDiv>
             <OrderViewHeader
               expand={sideBarExpanded}
+              orderId={/* orderView.orderId */ 30}
               setOrderView={setOrderView}
             />
           </TopDiv>
