@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FaLink, FaWindowClose } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -24,7 +23,7 @@ import UserActions from '../../store/ducks/user';
 const User = props => {
   const [showMenu, setShowMenu] = useState('');
   const [avatar, setAvatarUrl] = useState({ url: '' });
-  const [ConfirmAvatar, setConfirmAvatar] = useState(0);
+  // const [ConfirmAvatar, setConfirmAvatar] = useState(0);
   const { fetchUserRequest, updateUserRequest } = props;
   const { user } = props;
 

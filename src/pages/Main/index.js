@@ -11,6 +11,7 @@ import {
   SearchInput,
   BodyContainer,
   OrderView,
+  OrderViewHeader,
 } from '../../components';
 
 import ServiceOrdersActions from '../../store/ducks/serviceOrders';
@@ -36,15 +37,9 @@ const Main = props => {
       const diagStatuses = await api.get('/diagstatus');
       const repairStatuses = await api.get('/repairstatus');
       const diagsArr = Array.from(diagStatuses.data);
-      diagsArr.map(st => {
-        const status = st;
-        status.type = 'diag';
-      });
+      diagsArr.map(st => (st.type = 'diag'));
       const repairsArr = Array.from(repairStatuses.data);
-      repairsArr.map(st => {
-        const status = st;
-        status.type = 'repair';
-      });
+      repairsArr.map(st => (st.type = 'repair'));
       const statuses = diagsArr.concat(repairsArr);
       setOsStatuses(statuses);
     };
@@ -75,29 +70,40 @@ const Main = props => {
     <Container>
       <SideBar />
       <BodyContainer>
-        <TopDiv>
-          <SearchInput
-            expand={sideBarExpanded}
-            width="500px"
-            setOrderView={setOrderView}
-          />
-          <button
-            type="button"
-            onClick={() => setOrderView({ active: !orderView.active })}
-          >
-            go
-          </button>
-          {osStatus.map((status, i) => (
-            <FiltersButton
-              key={status.title}
-              color={getBtnColor(i)}
-              onClick={() => applyFilter(status.id, status.type, status.title)}
-              active={status.title === activeFilter.status}
+        {orderView.active ? (
+          <TopDiv>
+            <SearchInput
+              expand={sideBarExpanded}
+              width="500px"
+              setOrderView={setOrderView}
+            />
+            <button
+              type="button"
+              onClick={() => setOrderView({ active: !orderView.active })}
             >
-              {status.title}
-            </FiltersButton>
-          ))}
-        </TopDiv>
+              go
+            </button>
+            {osStatus.map((status, i) => (
+              <FiltersButton
+                key={status.title}
+                color={getBtnColor(i)}
+                onClick={() =>
+                  applyFilter(status.id, status.type, status.title)
+                }
+                active={status.title === activeFilter.status}
+              >
+                {status.title}
+              </FiltersButton>
+            ))}
+          </TopDiv>
+        ) : (
+          <TopDiv>
+            <OrderViewHeader
+              expand={sideBarExpanded}
+              setOrderView={setOrderView}
+            />
+          </TopDiv>
+        )}
         {orderView.active ? (
           <MainContainer expand={sideBarExpanded}>
             <ListWrapper className="box top-full">

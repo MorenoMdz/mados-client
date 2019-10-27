@@ -29,22 +29,22 @@ const OrderView = ({
   const [loading, setLoading] = useState(true);
   const {
     client,
-    creator,
-    diagStatus,
-    diagnostics,
+    // creator,
+    // diagStatus,
+    // diagnostics,
     equipment,
-    osStatus,
-    paymentStatus,
-    priority,
-    repairStatus,
-    repairs,
-    store,
+    // osStatus,
+    // paymentStatus,
+    // priority,
+    // repairStatus,
+    // repairs,
+    // store,
   } = serviceOrder;
-  // TODO Text Field / TextArea field components
-  // TODO Header Full grid block
+
   useEffect(() => {
-    if (orderId) fetchServiceOrderRequest(orderId, setLoading(false));
-  }, []);
+    fetchServiceOrderRequest(orderId);
+    setLoading(false);
+  }, [fetchServiceOrderRequest, orderId]);
 
   return (
     <Container expand={expand}>
