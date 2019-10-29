@@ -12,6 +12,7 @@ import {
   TextDiv,
   TextAreaDiv,
   DiagAreaDiv,
+  DiagCard,
   BottomCard,
   FooterCard,
   FooterHeader,
@@ -51,7 +52,7 @@ const OrderView = ({
     // console.log(status, statusType);
     updateServiceOrderRequest({ statusId, statusType, orderId });
   };
-
+  console.log(serviceOrder.diag_status_id);
   return (
     <Container expand={expand}>
       {loading ? (
@@ -136,7 +137,7 @@ const OrderView = ({
           <OrderHeader>Serviço</OrderHeader>
           <OrderBody>
             <CardBody>
-              <h5>Serviço</h5>
+              <h5>Diagnóstico</h5>
               <DiagAreaDiv>
                 <span>
                   Lorem ispanum dolor sit amet consectetur, adipisicing elit.
@@ -145,7 +146,7 @@ const OrderView = ({
                   voluptatem. Molestiae optio nihil blanditiis quam?
                 </span>
               </DiagAreaDiv>
-              <div>
+              <DiagCard>
                 <TextDiv>
                   <small>Contatado dia: </small>
                   <span>11/11/2011</span>
@@ -154,30 +155,41 @@ const OrderView = ({
                   <small>Prazo </small>
                   <span>13/11/2011</span>
                 </TextDiv>
-              </div>
-              <div>
-                <ActionButton
-                  color="#26C89F"
-                  width="40%"
-                  onClick={() => updateStatus(1, 'diag_status')}
-                  disabled={serviceOrder.diagStatus !== 1} // TODO
-                >
-                  <b>
+              </DiagCard>
+              <DiagCard>
+                {/*
+              1) If waiting approval = show buttons
+              2) If approved show only green
+              3) If denied show only red
+               */}
+                {serviceOrder.diag_status_id === 2 ? (
+                  <>
+                    <ActionButton
+                      color="#26C89F"
+                      width="40%"
+                      onClick={() => updateStatus(3, 'diag_status')}
+                    >
+                      <b>Aprovar</b>
+                    </ActionButton>
+                    <ActionButton
+                      color="#FF5370"
+                      width="40%"
+                      onClick={() => updateStatus(4, 'diag_status')}
+                    >
+                      <b>Negar</b>
+                    </ActionButton>
+                  </>
+                ) : (
+                  <ActionButton width="200px" disabled>
                     {serviceOrder.diagStatus && serviceOrder.diagStatus.title}
-                  </b>
-                </ActionButton>
-                <ActionButton
-                  color="#FF5370"
-                  width="40%"
-                  onClick={() => updateStatus(2, 'diag_status')}
-                >
-                  <b>Negar</b>
-                </ActionButton>
+                  </ActionButton>
+                )}
+
                 <TextDiv>
                   <small>Total </small>
                   <strong>1337,00</strong>
                 </TextDiv>
-              </div>
+              </DiagCard>
             </CardBody>
 
             <CardBody>
@@ -205,7 +217,24 @@ const OrderView = ({
         </OrderContainer>
       )}
       <BottomCard expand={expand}>
-        <FooterCard />
+        <FooterCard>
+          <>
+            <ActionButton
+              color="#26C89F"
+              width="40%"
+              onClick={() => updateStatus(3, 'diag_status')}
+            >
+              <b>1</b>
+            </ActionButton>
+            <ActionButton
+              color="#FF5370"
+              width="40%"
+              onClick={() => updateStatus(2, 'diag_status')}
+            >
+              <b>2</b>
+            </ActionButton>
+          </>
+        </FooterCard>
         {/* Payment Info & Delivery card */}
         <FooterCard>
           <div>

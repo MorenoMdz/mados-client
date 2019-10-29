@@ -158,4 +158,18 @@ export const ActionButton = styled.button`
   width: ${props => props.width || '100%'};
   height: 25px;
   font-size: 0.8rem;
+  &:disabled {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-bottom: 1px solid black;
+    color: #333;
+    cursor: default;
+  }
+`;
+
+export const DiagCard = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: orange;
 `;
