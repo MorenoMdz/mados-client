@@ -25,6 +25,7 @@ const OrderView = ({
   expand,
   serviceOrder,
   fetchServiceOrderRequest,
+  updateServiceOrderRequest,
 }) => {
   const [loading, setLoading] = useState(true);
   const {
@@ -45,6 +46,11 @@ const OrderView = ({
     fetchServiceOrderRequest(orderId);
     setLoading(false);
   }, [fetchServiceOrderRequest, orderId]);
+
+  const updateStatus = (statusId, statusType) => {
+    // console.log(status, statusType);
+    updateServiceOrderRequest({ statusId, statusType, orderId });
+  };
 
   return (
     <Container expand={expand}>
@@ -150,10 +156,21 @@ const OrderView = ({
                 </TextDiv>
               </div>
               <div>
-                <ActionButton color="#26C89F" width="40%">
-                  <b>Aprovar</b>
+                <ActionButton
+                  color="#26C89F"
+                  width="40%"
+                  onClick={() => updateStatus(1, 'diag_status')}
+                  disabled={serviceOrder.diagStatus !== 1} // TODO
+                >
+                  <b>
+                    {serviceOrder.diagStatus && serviceOrder.diagStatus.title}
+                  </b>
                 </ActionButton>
-                <ActionButton color="#FF5370" width="40%">
+                <ActionButton
+                  color="#FF5370"
+                  width="40%"
+                  onClick={() => updateStatus(2, 'diag_status')}
+                >
                   <b>Negar</b>
                 </ActionButton>
                 <TextDiv>

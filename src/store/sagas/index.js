@@ -7,6 +7,7 @@ import {
   fetchServiceOrder,
   fetchServiceOrders,
   searchServiceOrders,
+  updateServiceOrder,
 } from './serviceOrders';
 
 import { AuthTypes } from '../ducks/auth';
@@ -23,6 +24,10 @@ export default function* rootSaga() {
     takeLatest(
       ServiceOrdersTypes.FETCH_SERVICE_ORDER_REQUEST,
       fetchServiceOrder
+    ),
+    takeLatest(
+      ServiceOrdersTypes.UPDATE_SERVICE_ORDER_REQUEST,
+      updateServiceOrder
     ),
     takeLatest(
       ServiceOrdersTypes.FETCH_SERVICE_ORDERS_REQUEST,

@@ -6,3 +6,4 @@ export { default as MainContainer } from './MainContainer';
 export { default as SearchInput } from './SearchInput';
 export { default as OrderView } from './OrderView';
 export { default as OrderViewHeader } from './OrderViewHeader';
+export { default as OverlayLoader } from './OverlayLoader';

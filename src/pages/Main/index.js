@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import api from '../../services/api';
 import { TopDiv, ListWrapper, FiltersButton, BottomCard } from './styles';
 import {
@@ -12,6 +13,7 @@ import {
   BodyContainer,
   OrderView,
   OrderViewHeader,
+  OverlayLoader,
 } from '../../components';
 
 import ServiceOrdersActions from '../../store/ducks/serviceOrders';
@@ -19,6 +21,7 @@ import ServiceOrdersActions from '../../store/ducks/serviceOrders';
 const Main = props => {
   const [orderView, setOrderView] = useState({ active: false, orderId: null });
   const [osStatus, setOsStatuses] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState({ clicked: false });
   const {
     serviceOrders,
@@ -44,17 +47,21 @@ const Main = props => {
       setOsStatuses(statuses);
     };
     fetchStatuses();
+    setLoading(false);
   }, []);
 
   const applyFilter = (text, statusType, status) => {
     setOrderView({ active: true });
     const { clicked } = activeFilter;
     if (clicked && status === activeFilter.status) {
+      setLoading(true);
       searchServiceOrdersRequest('', 'search');
       setActiveFilter({ status: '', clicked: false });
+      setLoading(false);
       return;
     }
     searchServiceOrdersRequest(text, 'filter', statusType);
+    setLoading(false);
     setActiveFilter({ status, clicked: true });
   };
 
@@ -68,6 +75,7 @@ const Main = props => {
 
   return (
     <Container>
+      <OverlayLoader loading={loading} />
       <SideBar />
       <BodyContainer>
         {orderView.active ? (
@@ -77,12 +85,6 @@ const Main = props => {
               width="500px"
               setOrderView={setOrderView}
             />
-            <button
-              type="button"
-              onClick={() => setOrderView({ active: !orderView.active })}
-            >
-              go
-            </button>
             {osStatus.map((status, i) => (
               <FiltersButton
                 key={status.title}
@@ -100,7 +102,6 @@ const Main = props => {
           <TopDiv>
             <OrderViewHeader
               expand={sideBarExpanded}
-              orderId={/* orderView.orderId */ 30}
               setOrderView={setOrderView}
             />
           </TopDiv>
