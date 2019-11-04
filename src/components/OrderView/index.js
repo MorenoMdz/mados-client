@@ -7,7 +7,8 @@ import {
   Container,
   OrderContainer,
   OrderHeader,
-  OrderBody,
+  OrderSection,
+  OrderSectionCompact,
   CardBody,
   TextDiv,
   TextAreaDiv,
@@ -29,6 +30,10 @@ const OrderView = ({
   updateServiceOrderRequest,
 }) => {
   const [loading, setLoading] = useState(true);
+  const [expandedSection, setExpandedSection] = useState({
+    serviceOrderInfo: true,
+    repairInfo: false,
+  });
   const {
     client,
     // creator,
@@ -52,168 +57,260 @@ const OrderView = ({
     // console.log(status, statusType);
     updateServiceOrderRequest({ statusId, statusType, orderId });
   };
-  console.log(serviceOrder.diag_status_id);
+
   return (
     <Container expand={expand}>
       {loading ? (
         <>
           <OrderHeader>Order View</OrderHeader>
-          <OrderBody>
+          <OrderSection>
             <span>Loading...</span>
-          </OrderBody>
+          </OrderSection>
         </>
       ) : (
         <OrderContainer>
-          <OrderHeader>Ordem de Serviço {serviceOrder.created_at}</OrderHeader>
-          <OrderBody>
-            <CardBody>
-              <h5>Cliente</h5>
-              <div>
+          <OrderHeader>
+            Ordem de Serviço {serviceOrder.created_at}{' '}
+            <button
+              type="button"
+              onClick={() =>
+                setExpandedSection({
+                  ...expandedSection,
+                  serviceOrderInfo: !expandedSection.serviceOrderInfo,
+                })
+              }
+            >
+              {expandedSection.serviceOrderInfo ? 'ver menos' : 'ver mais'}
+            </button>
+          </OrderHeader>
+          {expandedSection.serviceOrderInfo ? (
+            <OrderSection>
+              <CardBody>
+                <h5>Cliente</h5>
+                <div>
+                  <TextDiv>
+                    <small>Nome: </small>
+                    <strong>{client && client.name}</strong>
+                  </TextDiv>
+                  <TextDiv>
+                    <small>Telefone 1: </small>
+                    <strong>{client && client.phone1}</strong>
+                  </TextDiv>
+                </div>
+                <div>
+                  <TextDiv>
+                    <small>CPF: </small>
+                    <strong>{client && client.cpf}</strong>
+                  </TextDiv>
+                  <TextDiv>
+                    <small>Telefone 2: </small>
+                    <strong>{client && client.phone2}</strong>
+                  </TextDiv>
+                </div>
                 <TextDiv>
-                  <small>Nome: </small>
-                  <strong>{client && client.name}</strong>
+                  <small>Email: </small>
+                  <strong>{client && client.email}</strong>
                 </TextDiv>
                 <TextDiv>
-                  <small>Telefone 1: </small>
-                  <strong>{client && client.phone1}</strong>
+                  <small>Endereço: </small>
+                  <strong>aaaaaaaaaaa</strong>
                 </TextDiv>
-              </div>
-              <div>
-                <TextDiv>
-                  <small>CPF: </small>
-                  <strong>{client && client.cpf}</strong>
-                </TextDiv>
-                <TextDiv>
-                  <small>Telefone 2: </small>
-                  <strong>{client && client.phone2}</strong>
-                </TextDiv>
-              </div>
-              <TextDiv>
-                <small>Email: </small>
-                <strong>{client && client.email}</strong>
-              </TextDiv>
-              <TextDiv>
-                <small>Endereço: </small>
-                <strong>aaaaaaaaaaa</strong>
-              </TextDiv>
-              <TextAreaDiv>
                 <small>Obs:</small>
-                <p>{serviceOrder.observation}</p>
-              </TextAreaDiv>
-            </CardBody>
+                <TextAreaDiv>
+                  <p>{serviceOrder.observation}</p>
+                </TextAreaDiv>
+              </CardBody>
 
-            <CardBody>
-              <h5>Equipamento</h5>
-              <div>
+              <CardBody>
+                <h5>Equipamento</h5>
+                <div>
+                  <TextDiv>
+                    <small>Aparelho: </small>
+                    <strong>{equipment && equipment.name}</strong>
+                  </TextDiv>
+                  <TextDiv>
+                    <small>Modelo 1: </small>
+                    <strong>{serviceOrder.equipment_model}</strong>
+                  </TextDiv>
+                </div>
+                <div>
+                  <TextDiv>
+                    <small>Serial: </small>
+                    <strong>{serviceOrder.serial_number}</strong>
+                  </TextDiv>
+                </div>
                 <TextDiv>
-                  <small>Aparelho: </small>
-                  <strong>{equipment && equipment.name}</strong>
+                  <small>Acessórios: </small>
+                  <strong>{serviceOrder.accessories}</strong>
                 </TextDiv>
                 <TextDiv>
-                  <small>Modelo 1: </small>
-                  <strong>{serviceOrder.equipment_model}</strong>
+                  <small>Detalhes: </small>
+                  <strong>{serviceOrder.details}</strong>
                 </TextDiv>
-              </div>
-              <div>
-                <TextDiv>
-                  <small>Serial: </small>
-                  <strong>{serviceOrder.serial_number}</strong>
-                </TextDiv>
-              </div>
-              <TextDiv>
-                <small>Acessórios: </small>
-                <strong>{serviceOrder.accessories}</strong>
-              </TextDiv>
-              <TextDiv>
-                <small>Detalhes: </small>
-                <strong>{serviceOrder.details}</strong>
-              </TextDiv>
-              <TextAreaDiv>
-                <small>Defeito</small>
-                <p>{serviceOrder.problem_description}</p>
-              </TextAreaDiv>
-            </CardBody>
-          </OrderBody>
-          <OrderHeader>Serviço</OrderHeader>
-          <OrderBody>
-            <CardBody>
-              <h5>Diagnóstico</h5>
-              <DiagAreaDiv>
-                <span>
-                  Lorem ispanum dolor sit amet consectetur, adipisicing elit.
-                  Numquam laborum incidunt, beatae soluta fugit ratione. Sed et
-                  eius veritatis soluta, unde cupiditate nesciunt voluptas
-                  voluptatem. Molestiae optio nihil blanditiis quam?
-                </span>
-              </DiagAreaDiv>
-              <DiagCard>
-                <TextDiv>
-                  <small>Contatado dia: </small>
-                  <span>11/11/2011</span>
-                </TextDiv>
-                <TextDiv>
-                  <small>Prazo </small>
-                  <span>13/11/2011</span>
-                </TextDiv>
-              </DiagCard>
-              <DiagCard>
-                {/*
+                <small>Defeito:</small>
+                <TextAreaDiv>
+                  <p>{serviceOrder.problem_description}</p>
+                </TextAreaDiv>
+              </CardBody>
+            </OrderSection>
+          ) : (
+            <OrderSectionCompact>
+              <CardBody>
+                <div>
+                  <TextDiv>
+                    <small>Nome: </small>
+                    <strong>{client && client.name}</strong>
+                  </TextDiv>
+                  <TextDiv>
+                    <small>Telefone 1: </small>
+                    <strong>{client && client.phone1}</strong>
+                  </TextDiv>
+                </div>
+              </CardBody>
+
+              <CardBody>
+                <div>
+                  <TextDiv>
+                    <small>Aparelho: </small>
+                    <strong>{equipment && equipment.name}</strong>
+                  </TextDiv>
+
+                  <TextDiv>
+                    <small>Serial: </small>
+                    <strong>{serviceOrder.serial_number}</strong>
+                  </TextDiv>
+                </div>
+              </CardBody>
+            </OrderSectionCompact>
+          )}
+          <OrderHeader>
+            Serviço
+            <button
+              type="button"
+              onClick={() =>
+                setExpandedSection({
+                  ...expandedSection,
+                  repairInfo: !expandedSection.repairInfo,
+                })
+              }
+            >
+              {expandedSection.repairInfo ? 'ver menos' : 'ver mais'}
+            </button>
+          </OrderHeader>
+          {expandedSection.repairInfo ? (
+            <OrderSection>
+              <CardBody>
+                <h5>Diagnóstico</h5>
+                <DiagAreaDiv>
+                  <span>
+                    Lorem ispanum dolor sit amet consectetur, adipisicing elit.
+                    Numquam laborum incidunt, beatae soluta fugit ratione. Sed
+                    et eius veritatis soluta, unde cupiditate nesciunt voluptas
+                    voluptatem. Molestiae optio nihil blanditiis quam?
+                  </span>
+                </DiagAreaDiv>
+                <DiagCard>
+                  <TextDiv className="left">
+                    <small>Contatado dia: </small>
+                    <span>11/11/2011</span>
+                  </TextDiv>
+                  <TextDiv className="right">
+                    <small>Prazo: </small>
+                    <span>13/11/2011</span>
+                  </TextDiv>
+                </DiagCard>
+                <DiagCard>
+                  {/*
               1) If waiting approval = show buttons
               2) If approved show only green
               3) If denied show only red
                */}
-                {serviceOrder.diag_status_id === 2 ? (
-                  <>
-                    <ActionButton
-                      color="#26C89F"
-                      width="40%"
-                      onClick={() => updateStatus(3, 'diag_status')}
-                    >
-                      <b>Aprovar</b>
-                    </ActionButton>
-                    <ActionButton
-                      color="#FF5370"
-                      width="40%"
-                      onClick={() => updateStatus(4, 'diag_status')}
-                    >
-                      <b>Negar</b>
-                    </ActionButton>
-                  </>
-                ) : (
-                  <ActionButton width="200px" disabled>
+                  {serviceOrder.diag_status_id === 2 ? (
+                    <div>
+                      <ActionButton
+                        color="#26C89F"
+                        width="40%"
+                        onClick={() => updateStatus(3, 'diag_status')}
+                      >
+                        <b>Aprovar</b>
+                      </ActionButton>
+                      <ActionButton
+                        color="#FF5370"
+                        width="40%"
+                        onClick={() => updateStatus(4, 'diag_status')}
+                      >
+                        <b>Negar</b>
+                      </ActionButton>
+                    </div>
+                  ) : (
+                    <div>
+                      <ActionButton width="200px" disabled>
+                        Status:{' '}
+                        {serviceOrder.diagStatus &&
+                          serviceOrder.diagStatus.title}
+                      </ActionButton>
+                    </div>
+                  )}
+
+                  <TextDiv className="right">
+                    <small>Total </small>
+                    <strong>1337,00</strong>
+                  </TextDiv>
+                </DiagCard>
+              </CardBody>
+
+              <CardBody>
+                <h5>Reparo</h5>
+                <DiagAreaDiv>
+                  <span>
+                    Lorem ispanum dolor sit amet consectetur, adipisicing elit.
+                    Numquam laborum incidunt, beatae soluta fugit ratione. Sed
+                    et eius veritatis soluta, unde cupiditate nesciunt voluptas
+                    voluptatem. Molestiae optio nihil blanditiis quam?
+                  </span>
+                </DiagAreaDiv>
+                <div>
+                  <TextDiv>
+                    <small>Efetuado: </small>
+                    <span>11/11/2011</span>
+                  </TextDiv>
+                  <TextDiv>
+                    <small>Total </small>
+                    <strong>1337,00</strong>
+                  </TextDiv>
+                </div>
+              </CardBody>
+            </OrderSection>
+          ) : (
+            <OrderSectionCompact>
+              <CardBody>
+                <DiagCard>
+                  <span>
+                    Status:
                     {serviceOrder.diagStatus && serviceOrder.diagStatus.title}
-                  </ActionButton>
-                )}
+                  </span>
 
-                <TextDiv>
-                  <small>Total </small>
-                  <strong>1337,00</strong>
-                </TextDiv>
-              </DiagCard>
-            </CardBody>
+                  <TextDiv className="right">
+                    <small>Total </small>
+                    <strong>1337,00</strong>
+                  </TextDiv>
+                </DiagCard>
+              </CardBody>
 
-            <CardBody>
-              <h5>Reparo</h5>
-              <DiagAreaDiv>
-                <span>
-                  Lorem ispanum dolor sit amet consectetur, adipisicing elit.
-                  Numquam laborum incidunt, beatae soluta fugit ratione. Sed et
-                  eius veritatis soluta, unde cupiditate nesciunt voluptas
-                  voluptatem. Molestiae optio nihil blanditiis quam?
-                </span>
-              </DiagAreaDiv>
-              <div>
-                <TextDiv>
-                  <small>Efetuado: </small>
-                  <span>11/11/2011</span>
-                </TextDiv>
-                <TextDiv>
-                  <small>Total </small>
-                  <strong>1337,00</strong>
-                </TextDiv>
-              </div>
-            </CardBody>
-          </OrderBody>
+              <CardBody>
+                <div>
+                  <TextDiv>
+                    <small>Efetuado: </small>
+                    <span>11/11/2011</span>
+                  </TextDiv>
+                  <TextDiv>
+                    <small>Total </small>
+                    <strong>1337,00</strong>
+                  </TextDiv>
+                </div>
+              </CardBody>
+            </OrderSectionCompact>
+          )}
         </OrderContainer>
       )}
       <BottomCard expand={expand}>

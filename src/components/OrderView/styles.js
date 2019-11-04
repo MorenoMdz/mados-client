@@ -13,10 +13,12 @@ export const Container = styled.div`
 `;
 export const OrderContainer = styled.div`
   height: 500px;
+  width: 100%;
 `;
 
 export const OrderHeader = styled.div`
-  height: 20px;
+  height: 25px;
+  width: 100%;
   background: #253544;
   display: flex;
   justify-content: space-between;
@@ -24,15 +26,45 @@ export const OrderHeader = styled.div`
   padding: 10px;
   color: #fff;
   font-size: 0.8rem;
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: underline;
+    padding-right: 5px;
+    font-size: 0.8rem;
+    color: #fff;
+  }
 `;
 
-export const OrderBody = styled.div`
+export const OrderSection = styled.div`
   width: 100%;
-  height: calc(50% - 30px);
+  /* height: calc(50% - 30px); */
+  height: 280px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
+  small {
+    color: #333;
+  }
+`;
+
+export const OrderSectionCompact = styled.div`
+  width: 100%;
+  height: calc(15% - 30px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #eee;
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 25px 5px 0 0;
+  }
 `;
 
 export const CardBody = styled.div`
@@ -161,15 +193,21 @@ export const ActionButton = styled.button`
   &:disabled {
     background-color: rgba(0, 0, 0, 0);
     border: none;
-    border-bottom: 1px solid black;
     color: #333;
     cursor: default;
+    justify-content: flex-start;
   }
 `;
 
 export const DiagCard = styled.div`
+  padding: 0 10px;
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  background: orange;
+
+  .left {
+    justify-content: flex-start;
+  }
+  .right {
+    justify-content: flex-end;
+  }
 `;
