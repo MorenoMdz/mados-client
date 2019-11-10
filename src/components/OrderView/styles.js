@@ -135,7 +135,7 @@ export const DiagAreaDiv = styled.div`
   overflow: auto;
   margin: 5px auto;
   border: 1px solid black;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
 `;
 
 export const BottomCard = styled.div`

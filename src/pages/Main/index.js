@@ -156,7 +156,7 @@ const Main = props => {
         ) : (
           <MainContainer expand={sideBarExpanded}>
             <OrderView
-              orderId={/* orderView.orderId */ 30}
+              orderId={/* orderView.orderId */ 28}
               expand={sideBarExpanded}
             />
           </MainContainer>

@@ -9,17 +9,18 @@ import {
   MainContainer,
   SearchInput,
   BodyContainer,
+  ServiceBox,
 } from '../../components';
 
 import ServiceOrdersActions from '../../store/ducks/serviceOrders';
 
 const Reports = props => {
-  const { fetchServiceOrdersRequest } = props;
+  const { fetchServiceOrdersRequest, serviceOrder } = props;
 
   useEffect(() => {
     fetchServiceOrdersRequest();
   }, [fetchServiceOrdersRequest]);
-
+  console.log('so', serviceOrder);
   return (
     <Container>
       <SideBar />
@@ -28,6 +29,7 @@ const Reports = props => {
         <MainContainer>
           <ListWrapper className="box top-full">
             <h1>Reports</h1>
+            <ServiceBox serviceOrder={serviceOrder} />
           </ListWrapper>
           <div className="box bottom-full" />
           {/* <div className="box bottom-left" />
@@ -39,13 +41,13 @@ const Reports = props => {
 };
 
 Reports.propTypes = {
-  serviceOrders: PropTypes.instanceOf(Array).isRequired,
+  serviceOrder: PropTypes.instanceOf(Object).isRequired,
   fetchServiceOrdersRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
-    serviceOrders: state.serviceOrders.data,
+    serviceOrder: state.serviceOrders.order,
   };
 };
 

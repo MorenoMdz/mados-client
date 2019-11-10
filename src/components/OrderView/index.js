@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { ServiceBox } from '..';
 import {
   Container,
   OrderContainer,
@@ -31,8 +31,8 @@ const OrderView = ({
 }) => {
   const [loading, setLoading] = useState(true);
   const [expandedSection, setExpandedSection] = useState({
-    serviceOrderInfo: true,
-    repairInfo: false,
+    serviceOrderInfo: false,
+    repairInfo: true,
   });
   const {
     client,
@@ -202,12 +202,13 @@ const OrderView = ({
               <CardBody>
                 <h5>Diagnóstico</h5>
                 <DiagAreaDiv>
-                  <span>
+                  {/* <span>
                     Lorem ispanum dolor sit amet consectetur, adipisicing elit.
                     Numquam laborum incidunt, beatae soluta fugit ratione. Sed
                     et eius veritatis soluta, unde cupiditate nesciunt voluptas
                     voluptatem. Molestiae optio nihil blanditiis quam?
-                  </span>
+                  </span> */}
+                  <ServiceBox serviceOrder={serviceOrder} type="diagnostics" />
                 </DiagAreaDiv>
                 <DiagCard>
                   <TextDiv className="left">
@@ -262,12 +263,7 @@ const OrderView = ({
               <CardBody>
                 <h5>Reparo</h5>
                 <DiagAreaDiv>
-                  <span>
-                    Lorem ispanum dolor sit amet consectetur, adipisicing elit.
-                    Numquam laborum incidunt, beatae soluta fugit ratione. Sed
-                    et eius veritatis soluta, unde cupiditate nesciunt voluptas
-                    voluptatem. Molestiae optio nihil blanditiis quam?
-                  </span>
+                  <ServiceBox serviceOrder={serviceOrder} type="repairs" />
                 </DiagAreaDiv>
                 <div>
                   <TextDiv>

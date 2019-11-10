@@ -16,16 +16,18 @@ function handleDates(response) {
     return format(fromNow, 'dd/MM/yyyy');
   };
 
-  // console.log('trying to handle dates', response);
-
   const splitDate = response.data.created_at.split('-');
   response.data.created_at = `${splitDate[2].split(' ')[0]}/${splitDate[1]}/${
     splitDate[0]
   }`;
+  // console.log('splitDate', splitDate);
   const expirationDate = getWarrantyDate(response.data.delivery_date);
-  response.data.delivery_date = formatDate(response.data.delivery_date);
-  response.data.payment_date = formatDate(response.data.payment_date);
-  response.data.warranty_expiration = expirationDate;
+  if (response.data.delivery_date) {
+    response.data.delivery_date = formatDate(response.data.delivery_date);
+    response.data.warranty_expiration = expirationDate;
+  }
+  if (response.data.payment_date)
+    response.data.payment_date = formatDate(response.data.payment_date);
 
   return response.data;
 }
@@ -34,9 +36,10 @@ export function* fetchServiceOrder({ id }) {
   try {
     const response = yield call(api.get, `/serviceorders/${id}`);
     const serviceOrder = handleDates(response);
+    // console.log('serviceOrder', serviceOrder);
     yield put(ServiceOrdersActions.fetchServiceOrderSuccess(serviceOrder));
   } catch (error) {
-    console.log('fetch Order failed');
+    console.log('fetch Single Order failed');
   }
 }
 
