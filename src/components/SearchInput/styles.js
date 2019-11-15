@@ -12,6 +12,6 @@ export const Input = styled.input`
 `;
 
 export const Form = styled.form`
-  margin: 20px 0 20px 10px;
+  margin: ${props => (props.compact ? '10px 0 10px 5px' : '20px 0 20px 10px')};
   width: 100%;
 `;

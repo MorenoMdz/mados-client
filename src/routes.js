@@ -9,6 +9,7 @@ import Admin from './pages/Admin';
 import Config from './pages/Config';
 import User from './pages/User';
 import Login from './pages/Login';
+import Dev from './pages/Dev';
 
 import { isAuthenticated } from './services/auth';
 
@@ -32,6 +33,7 @@ export default function Routes() {
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/" exact component={Home} />
+      <Route path="/dev" exact component={Dev} />
       <PrivateRoute path="/app" component={Main} />
       <PrivateRoute path="/reports" component={Reports} />
       <PrivateRoute path="/admin" component={Admin} />

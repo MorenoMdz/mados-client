@@ -7,8 +7,10 @@ import { Input, Form } from './styles';
 import ServiceOrdersActions from '../../store/ducks/serviceOrders';
 
 const SearchInput = ({
+  placeHolder,
   expand,
   width,
+  compact,
   searchServiceOrdersRequest,
   setOrderView,
 }) => {
@@ -18,9 +20,9 @@ const SearchInput = ({
   };
 
   return (
-    <Form>
+    <Form compact={compact}>
       <Input
-        placeholder="buscar"
+        placeholder={placeHolder}
         expand={expand}
         width={width}
         onChange={e => search(e)}
@@ -30,14 +32,20 @@ const SearchInput = ({
 };
 
 SearchInput.propTypes = {
+  placeHolder: PropTypes.string,
+  compact: PropTypes.bool,
   expand: PropTypes.bool,
   width: PropTypes.string,
   searchServiceOrdersRequest: PropTypes.func.isRequired,
+  setOrderView: PropTypes.func,
 };
 
 SearchInput.defaultProps = {
+  placeHolder: 'buscar',
+  compact: false,
   expand: false,
   width: '500px',
+  setOrderView: () => {},
 };
 
 const mapDispatchToProps = dispatch =>
