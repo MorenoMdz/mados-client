@@ -20,23 +20,23 @@ const NewServiceBox = ({ close, type }) => {
     description: '',
     obs: '',
   });
-  const [error, setError] = useState({
-    message: '',
-  });
-  const [success, setSuccess] = useState({
-    message: '',
+  const [message, setMessage] = useState({
+    error: '',
+    success: '',
   });
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!newService.title) return setError({ message: 'Titulo obrigatorio' });
+    if (!newService.title) return setMessage({ error: 'Titulo obrigatorio' });
     if (!newService.description)
-      return setError({ message: 'Descrição obrigatória' });
-    if (!newService.obs) return setError({ message: 'Observação obrigatória' });
+      return setMessage({ error: 'Descrição obrigatória' });
+    if (!newService.obs) return setMessage({ error: 'Observação obrigatória' });
     try {
       await api.post(`/${type}`, newService);
-      setError({ message: '' });
-      setSuccess({ message: 'Salvo com Sucesso' });
+      setMessage({
+        error: '',
+        success: 'Salvo com Sucesso',
+      });
       setNewService({
         title: '',
         description: '',
@@ -44,7 +44,7 @@ const NewServiceBox = ({ close, type }) => {
       });
       return true;
     } catch (err) {
-      setError({ message: 'Erro ao salvar' });
+      setMessage({ error: 'Erro ao salvar' });
     }
   }
 
@@ -54,8 +54,8 @@ const NewServiceBox = ({ close, type }) => {
         <span>Adicionar novo</span>
       </Header>
       <Body>
-        {error.message && <ErrorMessage>{error.message}</ErrorMessage>}
-        {success.message && <SuccessMessage>{success.message}</SuccessMessage>}
+        {message.error && <ErrorMessage>{message.error}</ErrorMessage>}
+        {message.success && <SuccessMessage>{message.success}</SuccessMessage>}
         <Form onSubmit={e => handleSubmit(e)}>
           <Input
             placeholder="Título"

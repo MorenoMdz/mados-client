@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ServiceBox } from '..';
+import { ServiceBox, ServiceManager } from '..';
 import {
   Container,
   OrderContainer,
@@ -60,6 +60,7 @@ const OrderView = ({
 
   return (
     <Container expand={expand}>
+      <ServiceManager />
       {loading ? (
         <>
           <OrderHeader>Order View</OrderHeader>
