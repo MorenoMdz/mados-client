@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const SideBarContainer = styled.div`
   width: 150px;
-  height: 800px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background: linear-gradient(180deg, #0a3e69 0%, #000000 100%);
@@ -19,7 +19,7 @@ export const SideBarContainer = styled.div`
 
 export const SideBarContainerCompact = styled.div`
   width: 50px;
-  height: 800px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background: linear-gradient(180deg, #0a3e69 0%, #000000 100%);
@@ -30,7 +30,28 @@ export const SideBarContainerCompact = styled.div`
   z-index: 20;
   a {
     width: 50px;
-    padding-left: 5px;
+  }
+`;
+
+export const LogoContainer = styled.div`
+  background-color: #222;
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+`;
+
+export const CustomLink = styled(Link)`
+  text-decoration: none;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
   }
 `;
 
@@ -41,6 +62,7 @@ export const SideNav = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
 `;
+
 export const AvatarWrapper = styled.div`
   width: ${props => (props.expand ? '150px' : '40px;')};
   height: ${props => (props.expand ? '150px' : '50px;')};
@@ -48,26 +70,39 @@ export const AvatarWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 `;
 
 export const SideLink = styled(Link)`
-  max-width: 150px;
+  width: 100%;
   height: 30px;
-  margin: 5px 0;
+  padding: 5px 10px;
   color: #fff;
   text-decoration: none;
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  img {
-    margin-left: 10px;
+
+  div {
+    width: 100%;
+
+    img {
+      margin: 0 auto;
+    }
   }
+
   span {
     padding: 0 10px;
   }
+
   &.active {
     background-color: #0e2438;
     font-weight: bold;
     text-decoration: underline;
+  }
+
+  :hover {
+    opacity: 0.5;
   }
 `;
 

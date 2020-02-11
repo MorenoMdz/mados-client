@@ -18,7 +18,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #666 url(${background}) no-repeat center top;
+    background: #ddd; /* url(${background}) no-repeat center top; */
     -webkit-font-smoothing: antialiased !important;
   }
 

@@ -7,9 +7,11 @@ export const Container = styled.div`
 `;
 
 export const OrderHeader = styled.div`
-  width: ${props => (props.expand ? '840px' : '940px')};
   position: relative;
-  left: ${props => (props.expand ? '100px' : '0px')};
+  left: 0;
+  width: 940px;
+  /* left: ${props => (props.expand ? '100px' : '0px')};
+  width: ${props => (props.expand ? '840px' : '940px')}; */
   height: 41px;
   background-color: #253544;
   padding: 0 10px;

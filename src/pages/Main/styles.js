@@ -4,8 +4,9 @@ export const Container = styled.div``;
 export const BottomCard = styled.div`
   width: 100%;
   background: orange;
-  width: ${props => (props.expand ? '820px' : '920px')};
-  left: ${props => (props.expand ? '120px' : '20px')};
+  width: 920px;
+  /* width: ${props => (props.expand ? '820px' : '920px')};
+  left: ${props => (props.expand ? '120px' : '20px')}; */
 `;
 export const ListWrapper = styled.div`
   height: 500px;

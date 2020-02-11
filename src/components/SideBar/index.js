@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,32 +9,40 @@ import SiteActions from '../../store/ducks/site';
 import {
   SideBarContainer,
   SideBarContainerCompact,
+  LogoContainer,
   ToggleBtn,
   AvatarWrapper,
   SideNav,
   SideLink,
+  CustomLink,
 } from './styles';
 import { AvatarContainer } from '..';
 
-import { dashboard, admin, statistics, cog, menu } from '../../assets/images';
+import {
+  M,
+  dashboard,
+  admin,
+  statistics,
+  cog,
+  menu,
+} from '../../assets/images';
 
 function SideBar(props) {
+  const [sideBarExpanded, setSideBarExpanded] = useState(false);
   const currentPage = props.location.pathname;
-  const {
-    user,
-    site: { sideBarExpanded },
-    siteUpdateRequest,
-  } = props;
+  const { user } = props;
 
-  // siteUpdateRequest({ sideBarExpanded: true });
+  const toggleSideBar = () => setSideBarExpanded(!sideBarExpanded);
 
-  const toggleSideBar = () =>
-    siteUpdateRequest({ sideBarExpanded: !sideBarExpanded });
-  // const toggleSideBar = () => seExpanded(!expanded);
   return (
     <>
       {sideBarExpanded ? (
         <SideBarContainer>
+          <LogoContainer>
+            <CustomLink to="/" size="30">
+              <img src={M} alt="logo" />
+            </CustomLink>
+          </LogoContainer>
           <ToggleBtn onClick={toggleSideBar}>{'<<<'}</ToggleBtn>
           <Link to="/user">
             <AvatarWrapper expand="true">
@@ -51,34 +59,47 @@ function SideBar(props) {
               to="/app"
               className={currentPage === '/app' ? 'active' : null}
             >
-              <img src={dashboard} alt="" />
+              <div>
+                <img src={dashboard} alt="" />
+              </div>
               <span>Dashboard</span>
             </SideLink>
             <SideLink
               to="/reports"
               className={currentPage === '/reports' ? 'active' : null}
             >
-              <img src={statistics} alt="" />
+              <div>
+                <img src={statistics} alt="" />
+              </div>
               <span>Relatórios</span>
             </SideLink>
             <SideLink
               to="/admin"
               className={currentPage === '/admin' ? 'active' : null}
             >
-              <img src={admin} alt="" />
+              <div>
+                <img src={admin} alt="" />
+              </div>
               <span>Admin</span>
             </SideLink>
             <SideLink
               to="/config"
               className={currentPage === '/config' ? 'active' : null}
             >
-              <img src={cog} alt="" />
+              <div>
+                <img src={cog} alt="" />
+              </div>
               <span>Configurações</span>
             </SideLink>
           </SideNav>
         </SideBarContainer>
       ) : (
         <SideBarContainerCompact>
+          <LogoContainer>
+            <CustomLink to="/" size="30">
+              <img src={M} alt="logo" />
+            </CustomLink>
+          </LogoContainer>
           <ToggleBtn onClick={toggleSideBar}>
             <img src={menu} alt="expandMenu" />
           </ToggleBtn>

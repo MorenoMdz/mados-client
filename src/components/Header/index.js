@@ -7,7 +7,6 @@ import UserActions from '../../store/ducks/user';
 
 import Clock from '../Clock';
 import {
-  M,
   home,
   HamburguerMenu,
   closeButton,
@@ -17,7 +16,6 @@ import {
 
 import {
   HeaderContainer,
-  LeftHeader,
   RightHeader,
   CustomLink,
   WelcomeBar,
@@ -28,7 +26,7 @@ import {
   ToggleMenu,
 } from './styles';
 
-function Header({ user, site: { sideBarExpanded }, fetchUserRequest }) {
+function Header({ user, fetchUserRequest }) {
   const [showMenu, setShowMenu] = useState('');
   useEffect(() => {
     fetchUserRequest();
@@ -38,12 +36,7 @@ function Header({ user, site: { sideBarExpanded }, fetchUserRequest }) {
 
   return (
     <HeaderContainer>
-      <LeftHeader expand={sideBarExpanded}>
-        <CustomLink to="/" size="30">
-          <img src={M} alt="logo" />
-        </CustomLink>
-      </LeftHeader>
-      <RightHeader expand={sideBarExpanded}>
+      <RightHeader>
         <WelcomeBar>
           <CustomLink to="/app" size="30">
             <img src={home} alt="home" />

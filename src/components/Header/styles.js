@@ -10,27 +10,14 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 30;
-`;
-
-export const LeftHeader = styled.div`
-  background-color: #222;
-  width: ${props => (props.expand ? '150px' : '50px')};
-  height: 60px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
+  /* z-index: 30; */
 `;
 
 export const RightHeader = styled.div`
   height: 60px;
-  width: ${props => (props.expand ? '874px' : '974px')};
+  width: 974px;
   position: relative;
-  left: ${props => (props.expand ? '150px' : '50px')};
+  left: 50px;
 
   display: flex;
   justify-content: space-between;

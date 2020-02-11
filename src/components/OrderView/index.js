@@ -60,7 +60,7 @@ const OrderView = ({
 
   return (
     <Container expand={expand}>
-      <ServiceManager />
+      {/* <ServiceManager /> */}
       {loading ? (
         <>
           <OrderHeader>Order View</OrderHeader>

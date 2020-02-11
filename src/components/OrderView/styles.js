@@ -5,7 +5,8 @@ export const Container = styled.div`
   height: 650px;
   padding: 0 !important;
   overflow: auto;
-  width: ${props => (props.expand ? '820px' : '920px')};
+  width: 920px;
+  /* width: ${props => (props.expand ? '820px' : '920px')}; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -147,7 +148,8 @@ export const BottomCard = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   display: flex;
-  width: ${props => (props.expand ? '820px' : '920px')};
+  width: 920px;
+  /* width: ${props => (props.expand ? '820px' : '920px')}; */
 `;
 
 export const FooterCard = styled.div`

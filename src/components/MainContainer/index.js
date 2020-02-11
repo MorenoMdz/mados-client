@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
-  width: ${props => (props.expand ? '840px' : '940px')};
   height: 660px;
   background-color: #fff;
   z-index: 20;
   position: relative;
-  left: ${props => (props.expand ? '120px' : '20px')};
+  width: 940px;
+  left: 20px;
+  /* width: ${props => (props.expand ? '840px' : '940px')};
+  left: ${props => (props.expand ? '120px' : '20px')}; */
   /* margin: 0 auto; */
 
   padding: 10px;
